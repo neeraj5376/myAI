@@ -72,7 +72,7 @@ function App() {
   };
 
   return (
-    <div className="h-screen flex overflow-auto flex-col bg-zinc-950 font-sans antialiased selection:bg-zinc-700 selection:text-zinc-200">
+    <div className="h-screen flex flex-col bg-zinc-950 font-sans antialiased selection:bg-zinc-700 selection:text-zinc-200">
 
       {/* Header */}
       <header className="backdrop-blur-xl bg-zinc-900/50 border-b border-zinc-800 px-6 py-4 sticky top-0 z-10 flex items-center justify-between shadow-xl">
@@ -98,7 +98,7 @@ function App() {
 
           {/* Empty State Welcome Screen */}
           {messages.length === 0 && (
-            <div className="flex flex-col items-center justify-center h-[65vh] text-center px-4">
+            <div className="flex flex-col items-center justify-center h-50 text-center px-4">
 
               <h2 className="text-4xl p-10 fixed uppercase font-extrabold tracking-tight text-zinc-100">
                 wall come your ai assistant.
