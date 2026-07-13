@@ -36,7 +36,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/chat",
+        "https://myai-g3qt.onrender.com/api/chat",
         { message: userText }
       );
 
