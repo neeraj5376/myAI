@@ -82,10 +82,10 @@ function App() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-zinc-950 text-white overflow-hidden">
+     <div className="h-screen flex flex-col bg-zinc-950 text-white overflow-auto">
       {/* Header */}
-      <header className="backdrop-blur-xl bg-zinc-900/70 border-b border-zinc-800 px-3 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-center gap-4 shadow-lg">
-        <div className="flex items-center gap-3">
+      <header className="w-full max-w-5xl mx-auto backdrop-blur-xl bg-zinc-900/70 border-b border-zinc-800 px-3 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-center gap-4 shadow-lg">
+        <div className="flex flex-col justify-center sm:flex-row items-center gap-3 w-full">
           <img
             src={ai}
             alt="AI"
@@ -96,15 +96,13 @@ function App() {
             I am your <br /> AI Assistant
           </h1>
         </div>
-
-       
       </header>
 
       {/* Chat Area */}
       <main className="flex-1 overflow-y-auto px-2 sm:px-4 py-4 sm:py-6">
-        <div className="max-w-4xl mx-auto space-y-5">
+        <div className="max-w-5xl mx-auto space-y-5">
           {messages.length === 0 && (
-            <div className="h-[70vh] flex items-center justify-center">
+            <div className="h-[70vh] flex items-center justify-center px-4">
               <h2 className="text-2xl sm:text-5xl font-extrabold text-center text-zinc-300">
                 Welcome Your AI Assistant
               </h2>
@@ -117,17 +115,11 @@ function App() {
             return (
               <div
                 key={index}
-                className={`flex ${
-                  isUser
-                    ? "justify-end"
-                    : "justify-start"
-                }`}
+                className={`flex ${isUser ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[90%] sm:max-w-[75%] flex flex-col ${
-                    isUser
-                      ? "items-end"
-                      : "items-start"
+                  className={`max-w-[95%] sm:max-w-[75%] flex flex-col ${
+                    isUser ? "items-end" : "items-start"
                   }`}
                 >
                   <div
@@ -168,22 +160,20 @@ function App() {
 
       {/* Footer */}
       <footer className="border-t border-zinc-800 bg-zinc-950 p-2 sm:p-4">
-        <div className="max-w-4xl mx-auto flex gap-2 sm:gap-3 items-end bg-zinc-900 border border-zinc-800 rounded-2xl p-2">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row gap-2 sm:gap-3 items-end bg-zinc-900 border border-zinc-800 rounded-2xl p-2">
           <textarea
             rows="1"
             value={message}
-            onChange={(e) =>
-              setMessage(e.target.value)
-            }
+            onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type your message..."
-            className="flex-1 bg-transparent text-white placeholder-zinc-500 resize-none outline-none px-3 py-2 text-sm sm:text-base"
+            className="flex-1 min-h-[42px] sm:min-h-[48px] max-h-36 bg-transparent text-white placeholder-zinc-500 resize-none outline-none px-3 py-2 text-sm sm:text-base"
           />
 
           <button
             onClick={sendMessage}
             disabled={!message.trim() || loading}
-            className="bg-white text-black font-semibold px-4 sm:px-5 py-2 rounded-xl hover:bg-zinc-200 transition disabled:opacity-50"
+            className="w-full sm:w-auto bg-white text-black font-semibold px-4 sm:px-5 py-2 rounded-xl hover:bg-zinc-200 transition disabled:opacity-50"
           >
             Send
           </button>
