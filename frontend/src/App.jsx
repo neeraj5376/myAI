@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import ai from "./assets/ai.png"
+import ai from "./assets/ai.png";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -27,7 +27,10 @@ function App() {
       {
         sender: "user",
         text: userText,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        timestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       },
     ]);
 
@@ -45,18 +48,25 @@ function App() {
         {
           sender: "bot",
           text: res.data.reply,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          timestamp: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
         },
       ]);
     } catch (error) {
       console.error(error);
+
       setMessages((prev) => [
         ...prev,
         {
           sender: "bot",
           text: "Sorry, something went wrong. Please check your connection.",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          isError: true
+          timestamp: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          isError: true,
         },
       ]);
     } finally {
@@ -72,128 +82,131 @@ function App() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-zinc-950 font-sans antialiased selection:bg-zinc-700 selection:text-zinc-200">
+    <div className="h-screen flex flex-col bg-zinc-950 overflow-hidden">
 
       {/* Header */}
-      <header className="backdrop-blur-xl bg-zinc-900/50 border-b border-zinc-800 px-6 py-4 sticky top-0 z-10 flex items-center justify-between shadow-xl">
-        <div className="flex items-center gap-3 mx-auto sm:mx-0">
-          <div className="flex items-center gap-3">
-            <div className="relative flex ">
-              <img className=" size-22" src={ai} alt="" />
-            </div>
-            <h1 className="text-3xl pl-10 font-bold tracking-tight text-zinc-100">
-              I am your <br /> AI Assistant.
-            </h1>
+      <header className="bg-zinc-900 border-b border-zinc-800 px-4 sm:px-6 py-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-center sm:justify-start gap-3">
+          <img
+            src={ai}
+            alt="AI"
+            className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
+          />
 
-          </div>
+          <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-white leading-tight">
+            I am your <br />
+            AI Assistant
+          </h1>
         </div>
-        
-
       </header>
 
-
       {/* Chat Area */}
-      <main className="flex-1 overflow-y-auto px-4 py-8 bg-zinc-900/10">
-        <div className="max-w-3xl mx-auto space-y-6">
+      <main className="flex-1 overflow-y-auto px-3 sm:px-5 py-4">
+        <div className="max-w-4xl mx-auto">
 
-          {/* Empty State Welcome Screen */}
+          {/* Welcome Screen */}
           {messages.length === 0 && (
-            <div className="flex flex-col items-center justify-center h-50 text-center px-4">
-
-              <h2 className="text-4xl p-10 fixed uppercase font-extrabold tracking-tight text-zinc-100">
-                wall come your ai assistant.
+            <div className="flex items-center justify-center min-h-[60vh] text-center px-4">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-zinc-200 uppercase">
+                Welcome Your AI Assistant
               </h2>
-
             </div>
           )}
 
-          {/* Messages Loop */}
-          {messages.map((msg, index) => {
-            const isUser = msg.sender === "user";
-            return (
-              <div
-                key={index}
-                className={`flex gap-4 items-start ${isUser ? "justify-end" : "justify-start"}`}
-              >
-                {!isUser && (
-                  <div className="w-8 h-8 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-xs font-bold text-zinc-400 mt-1 shrink-0 shadow-md">
-                    AI
-                  </div>
-                )}
+          {/* Messages */}
+          <div className="space-y-5">
+            {messages.map((msg, index) => {
+              const isUser = msg.sender === "user";
 
-                <div className={`flex flex-col max-w-[85%] sm:max-w-[75%] ${isUser ? "items-end" : "items-start"}`}>
+              return (
+                <div
+                  key={index}
+                  className={`flex gap-2 sm:gap-4 ${
+                    isUser ? "justify-end" : "justify-start"
+                  }`}
+                >
+                  {!isUser && (
+                    <div className="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center text-xs text-white shrink-0">
+                      AI
+                    </div>
+                  )}
+
                   <div
-                    className={`px-5 py-3.5 rounded-2xl shadow-md transition-all duration-200 whitespace-pre-wrap text-[15px] leading-relaxed ${isUser
-                        ? "bg-zinc-100 text-zinc-900 font-medium rounded-tr-sm"
-                        : msg.isError
-                          ? "bg-red-950/40 border border-red-900/50 text-red-200 rounded-tl-sm"
-                          : "bg-zinc-800/90 border border-zinc-700 text-zinc-100 rounded-tl-sm"
-                      }`}
+                    className={`flex flex-col ${
+                      isUser ? "items-end" : "items-start"
+                    } max-w-[85%] sm:max-w-[75%]`}
                   >
-                    {msg.text}
-                  </div>
+                    <div
+                      className={`px-4 py-3 rounded-2xl text-sm sm:text-base whitespace-pre-wrap break-words ${
+                        isUser
+                          ? "bg-white text-black rounded-tr-sm"
+                          : msg.isError
+                          ? "bg-red-900/30 border border-red-800 text-red-200 rounded-tl-sm"
+                          : "bg-zinc-800 text-white border border-zinc-700 rounded-tl-sm"
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
 
-                  {msg.timestamp && (
-                    <span className="text-[10px] text-zinc-500 mt-1.5 px-1 tracking-wider">
+                    <span className="text-[10px] sm:text-xs text-zinc-500 mt-1">
                       {msg.timestamp}
                     </span>
+                  </div>
+
+                  {isUser && (
+                    <div className="w-8 h-8 rounded-lg bg-zinc-700 border border-zinc-600 flex items-center justify-center text-xs text-white shrink-0">
+                      ME
+                    </div>
                   )}
                 </div>
+              );
+            })}
 
-                {isUser && (
-                  <div className="w-8 h-8 rounded-xl bg-zinc-700 border border-zinc-600 flex items-center justify-center text-xs font-bold text-zinc-200 mt-1 shrink-0 shadow-md">
-                    ME
+            {/* Loading */}
+            {loading && (
+              <div className="flex gap-3">
+                <div className="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center text-white">
+                  AI
+                </div>
+
+                <div className="bg-zinc-800 border border-zinc-700 px-4 py-3 rounded-2xl">
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-white rounded-full animate-bounce delay-150"></div>
+                    <div className="w-2 h-2 bg-white rounded-full animate-bounce delay-300"></div>
                   </div>
-                )}
-              </div>
-            );
-          })}
-
-          {/* Loading Indicator */}
-          {loading && (
-            <div className="flex gap-4 items-start justify-start">
-              <div className="w-8 h-8 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-xs font-bold text-zinc-500 mt-1">
-                ..
-              </div>
-              <div className="bg-zinc-800/40 border border-zinc-700 px-5 py-4 rounded-2xl rounded-tl-sm shadow-lg">
-                <div className="flex gap-1.5 items-center py-1 px-0.5">
-                  <div className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce [animation-duration:1s]"></div>
-                  <div className="w-2 h-2 bg-zinc-500 rounded-full animate-bounce [animation-duration:1s] [animation-delay:0.2s]"></div>
-                  <div className="w-2 h-2 bg-zinc-600 rounded-full animate-bounce [animation-duration:1s] [animation-delay:0.4s]"></div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <div ref={chatEndRef} />
+            <div ref={chatEndRef}></div>
+          </div>
         </div>
       </main>
 
-      {/* Input Area */}
-      <footer className="border-t border-zinc-800 bg-zinc-950 p-4 sm:p-6 shadow-2xl">
-        <div className="max-w-3xl mx-auto flex gap-3 items-end bg-zinc-900 border border-zinc-800 rounded-2xl p-2 focus-within:border-zinc-600 transition-all shadow-inner">
+      {/* Input */}
+      <footer className="border-t border-zinc-800 bg-zinc-950 p-3 sm:p-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-end gap-2 bg-zinc-900 border border-zinc-800 rounded-2xl p-2">
 
-          <textarea
-            rows="1"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Type a message..."
-            className="flex-1 bg-transparent text-white placeholder-zinc-500 rounded-xl pl-3 pr-2 py-2.5 outline-none resize-none text-[15px] max-h-32 min-h-[40px] leading-normal"
-            style={{ height: 'auto' }}
-          />
+            <textarea
+              rows="1"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Type a message..."
+              className="flex-1 bg-transparent text-white placeholder-zinc-500 resize-none outline-none px-3 py-2 text-sm sm:text-base"
+            />
 
-          <button
-            onClick={sendMessage}
-            disabled={!message.trim() || loading}
-            className="bg-zinc-100 hover:bg-zinc-200 disabled:bg-zinc-800 px-5 py-2.5 rounded-xl text-zinc-950 disabled:text-zinc-600 font-bold text-sm shadow-md active:scale-[0.98] transition-all disabled:pointer-events-none flex items-center gap-1.5 h-[40px]"
-          >
-            <span>Send</span>
-            <svg className="w-3.5 h-3.5 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-            </svg>
-          </button>
+            <button
+              onClick={sendMessage}
+              disabled={!message.trim() || loading}
+              className="bg-white text-black px-4 sm:px-5 py-2.5 rounded-xl font-semibold disabled:opacity-50 transition"
+            >
+              Send
+            </button>
 
+          </div>
         </div>
       </footer>
     </div>
