@@ -57,16 +57,16 @@ function App() {
     } catch (error) {
       console.error(error);
 
-      setMessages((prev) => [
+         setMessages((prev) => [
         ...prev,
         {
           sender: "bot",
-          text: "Sorry, something went wrong. Please check your connection.",
+         text: res.data.reply,
+          text: (res.data.reply || "").replace(/\\n/g, "\n"),
           timestamp: new Date().toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
           }),
-          isError: true,
         },
       ]);
     } finally {
