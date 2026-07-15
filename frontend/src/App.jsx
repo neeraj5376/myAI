@@ -97,11 +97,13 @@ function App() {
             I am your <br />
             AI Assistant
           </h1>
+          
         </div>
+        
       </header>
 
       {/* Chat Area */}
-      <main className="flex-1 overflow-y-auto px-3 sm:px-5 py-4">
+      <main className="flex-1 overflow-y-auto max-h-[90%] px-3 sm:px-5 py-4">
         <div className="max-w-4xl mx-auto">
 
           {/* Welcome Screen */}
@@ -134,7 +136,7 @@ function App() {
                   <div
                     className={`flex flex-col ${
                       isUser ? "items-end" : "items-start"
-                    } max-w-[85%] sm:max-w-[75%]`}
+                    } max-w-[80%] sm:max-w-[70%]`}
                   >
                     <div
                       className={`px-4 py-3 rounded-2xl text-sm sm:text-base whitespace-pre-wrap break-words ${
