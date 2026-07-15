@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import ai from "./assets/ai.png";
+import Header from "./Hearder"
 
 function App() {
   const [message, setMessage] = useState("");
@@ -85,22 +86,7 @@ function App() {
     <div className="h-screen flex flex-col bg-zinc-950 overflow-hidden">
 
       {/* Header */}
-      <header className="bg-zinc-900 border-b border-zinc-800 px-4 sm:px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-center sm:justify-start gap-3">
-          <img
-            src={ai}
-            alt="AI"
-            className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
-          />
-
-          <h1 className="text-lg sm:text-2xl md:text-3xl font-bold text-white leading-tight">
-            I am your <br />
-            AI Assistant
-          </h1>
-          
-        </div>
-        
-      </header>
+      <Header/>
 
       {/* Chat Area */}
       <main className="flex-1 overflow-y-auto max-h-[90%] px-3 sm:px-5 py-4">
