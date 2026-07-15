@@ -89,7 +89,7 @@ function App() {
       <Header/>
 
       {/* Chat Area */}
-      <main className="flex-1 overflow-y-auto max-h-[90%] px-3 sm:px-5 py-4">
+      <main className="flex-1 pt-25 overflow-y-auto max-h-[90%] px-3 sm:px-5 py-4">
         <div className="max-w-4xl mx-auto">
 
           {/* Welcome Screen */}

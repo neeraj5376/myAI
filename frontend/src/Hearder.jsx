@@ -3,7 +3,7 @@ import ai from "./assets/ai.png";
 
 const Hearder = () => {
   return (
-    <header className="bg-zinc-900 fixed w-full border-b border-zinc-800 px-2 sm:px-6 py-2">
+    <header className="bg-zinc-900 fixed w-full h-25 border-b border-zinc-800 px-2 sm:px-6 py-2">
         <div className="max-w-6xl mx-auto flex items-center justify-center sm:justify-start gap-3">
           <img
             src={ai}
